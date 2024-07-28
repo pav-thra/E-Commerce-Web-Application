@@ -6,7 +6,7 @@ import lombok.Data;
 //annotate this object so that Java knows to map it to the database
 @Entity
 
-//to automatically generate getters and setters we use Lombok
+//to automatically generate getters and setters which we use Lombok
 @Data
 
 //which table to map to explicitly
