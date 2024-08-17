@@ -1,6 +1,7 @@
 package org.example.CRUDapplication.Product;
 
 import org.example.CRUDapplication.Product.Model.Product;
+import org.example.CRUDapplication.Product.QueryHandlers.GetAllProductsQueryHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,21 +20,29 @@ public class ProductController
     //Create, Read, Update, Delete
     //Post, Get, Set, Delete : Type of request methods
 
-    //use the product repo to complete the controller
+    //use the product repo to complete the controller and to use methods like findById and findAll
     //inject Product repo here
     @Autowired
     private ProductRepository productRepository;
 
+    //when you have queries no need of Product repository here
+
+    //inject the query handlers here
+    @Autowired
+    private GetAllProductsQueryHandler getAllProductsQueryHandler;
 
     @GetMapping
     public ResponseEntity<List<Product>> getProducts()
     {
-        return ResponseEntity.ok(productRepository.findAll());
+        //return ResponseEntity.ok(productRepository.findAll());
 
         //return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
         //.status() - used to set the HTTP status
         //response body - here it returns an empty list as the body of the response
         //return ResponseEntity.ok().build(); - Creates a ResponseEntity with a 200 OK status and no body.
+
+        //we are using query handler now instead of product repository
+        return getAllProductsQueryHandler.execute(null);
     }
 
     //to get specific product using its id
