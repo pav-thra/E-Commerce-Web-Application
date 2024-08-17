@@ -56,6 +56,25 @@ public class ProductController
         productRepository.save(product);
 
         return ResponseEntity.ok().build();
+    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity updateProduct(@PathVariable Integer id, @RequestBody Product product)
+    {
+        // which product to update
+        //using ID appear or by passing ID
+
+        product.setId(id);
+        productRepository.save(product);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteProduct(@PathVariable Integer id)
+    {
+        // find the product using id
+        Product product = productRepository.findById(id).get();
+        productRepository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }
